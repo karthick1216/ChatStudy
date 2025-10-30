@@ -72,6 +72,59 @@ User authentication mechanisms are essential to ensure secure and authorized acc
 Client-server chat applications are versatile tools that facilitate real-time communication between users over a network. They incorporate various components, including server-side and client-side elements, and must consider factors such as security, scalability, and concurrency. As technology continues to advance, client-server chat applications remain integral for collaborative communication in various domains.
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
+## program
+## client
+```python
+import socket
+
+# Create a socket object
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Connect to the server
+client_socket.connect(('localhost', 12345))
+
+# Send a message to server
+client_socket.send("Hello from client!".encode())
+
+# Receive response from server
+data = client_socket.recv(1024).decode()
+print("Server says:", data)
+
+# Close connection
+client_socket.close()
+```
+## server
+```python
+import socket
+
+# Create a socket object
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Bind to host and port
+server_socket.bind(('localhost', 12345))
+
+# Start listening for connections
+server_socket.listen(1)
+print("Server is waiting for connection...")
+
+# Accept a connection
+client_socket, addr = server_socket.accept()
+print(f"Connected to client at {addr}")
+
+# Receive data from client
+data = client_socket.recv(1024).decode()
+print("Client says:", data)
+
+# Send response to client
+client_socket.send("Hello from server!".encode())
+
+# Close connection
+client_socket.close()
+server_socket.close()
+```
+## output
+<img width="1253" height="296" alt="image" src="https://github.com/user-attachments/assets/798da4c1-3384-45c9-8ef9-9db7efb50390" />
+
 
 
 ## Result:
